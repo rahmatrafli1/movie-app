@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trailers', function (Blueprint $table) {
+        Schema::create('trailers_urls', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('embed_html');
+            $table->integer('trailerable_id');
+            $table->string('trailerable_type');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trailers');
+        Schema::dropIfExists('trailers_urls');
     }
 };
