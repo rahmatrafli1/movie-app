@@ -1,7 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Livewire\CastIndex;
+use App\Livewire\GenreIndex;
+use App\Livewire\MovieIndex;
+use App\Livewire\SerieIndex;
+use App\Livewire\SeasonIndex;
+use App\Livewire\EpisodeIndex;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Livewire\TagIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +41,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
     'role:admin'
-])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('movies', MovieIndex::class)->name('movies.index');
+    Route::get('series', SerieIndex::class)->name('series.index');
+    Route::get('series/{serie}/seasons', SeasonIndex::class)->name('seasons.index');
+    Route::get('series/{serie}/seasons/{season}/episodes', EpisodeIndex::class)->name('episodes.index');
+    Route::get('genres', GenreIndex::class)->name('genres.index');
+    Route::get('casts', CastIndex::class)->name('casts.index');
+    Route::get('tags', TagIndex::class)->name('tags.index');
 });
