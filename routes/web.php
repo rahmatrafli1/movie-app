@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,5 @@ Route::middleware([
     'verified',
     'role:admin'
 ])->group(function () {
-    Route::get('/admin', function () {
-        return 'admin';
-    })->name('admin.index');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });
