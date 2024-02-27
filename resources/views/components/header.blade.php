@@ -17,7 +17,7 @@
             </span>
 
             <input class="w-32 pl-10 pr-4 rounded-md form-input sm:w-64 focus:border-indigo-600" type="text"
-                placeholder="Search">
+                id=search placeholder="Search">
         </div>
     </div>
 
