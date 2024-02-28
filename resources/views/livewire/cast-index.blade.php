@@ -1,20 +1,16 @@
 <section class="container mx-auto p-6 font-mono">
     <div class="w-full flex mb-4 p-2 justify-end">
-        <form>
-            <div class="shadow overflow-hidden sm:rounded-md bg-white">
-                <div class="mt-5 md:mt-0 md:col-span-2 px-4 py-5">
-                    <div class="sm:col-span-3">
-                        <label for="cast_tmdb_id" class="block text-sm font-medium leading-6 text-gray-900">Cast TMDB
-                            ID</label>
-                        <div class="mt-2">
-                            <input wire:model="castTMDBId" type="text" id="cast_tmdb_id" autocomplete="off"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        </div>
-                    </div>
-                </div>
-                <div class="px-4 py-1">
-                    <x-button wire:click="generateCast">Generate Cast</x-button>
-                </div>
+        <form class="flex space-x-4 shadow bg-white rounded-md m-2 p-2">
+            <div class="p-1 flex items-center">
+                <label for="cast_tmdb_id" class="block text-sm font-medium text-gray-900 mr-4">Cast TMDB
+                    ID</label>
+                <input wire:model="castTMDBId" type="text" name="cast_tmdb_id" id="cast_tmdb_id" autocomplete="off"
+                    class="px-3 py-2 border border-gray-300 rounded">
+            </div>
+            <div class="p-1">
+                <button type="button" wire:click="generateCast"
+                    class="inline-flex items-center justify-center py-2 px-4 border border-transparent text-base leading-6 bg-green-600 rounded text-white">Generate
+                    Cast</button>
             </div>
         </form>
     </div>
