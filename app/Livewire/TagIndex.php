@@ -41,6 +41,8 @@ class TagIndex extends Component
         $this->reset();
         $this->showTagModal = false;
         $this->tags = Tag::all();
+
+        $this->dispatch('banner-message', style: 'success', message: 'Tags created successfully!');
     }
 
     public function showEditModal($tagId)
@@ -63,6 +65,8 @@ class TagIndex extends Component
         $this->reset();
         $this->showTagModal = false;
         $this->tags = Tag::all();
+
+        $this->dispatch('banner-message', style: 'success', message: 'Tags updated successfully!');
     }
 
     public function deleteTag($tagId)
@@ -71,6 +75,8 @@ class TagIndex extends Component
         $tag->delete();
         $this->reset();
         $this->tags = Tag::all();
+
+        $this->dispatch('banner-message', style: 'success', message: 'Tags deleted successfully!');
     }
 
     public function render()

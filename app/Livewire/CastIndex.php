@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
 
-use function Termwind\style;
-
 class CastIndex extends Component
 {
     use WithPagination;
@@ -19,6 +17,14 @@ class CastIndex extends Component
     public $castTMDBId;
     public $castName;
     public $castPosterPath;
+    public $castId;
+
+    public $showCastModal = false;
+
+    protected $rules = [
+        'castName' => 'required',
+        'castPosterPath' => 'required'
+    ];
 
     public function generateCast()
     {
@@ -36,9 +42,56 @@ class CastIndex extends Component
 
             $this->reset();
             Cast::latest()->paginate(5);
+
+            $this->dispatch('banner-message', style: 'success', message: 'Cast created successfully!');
         } else {
             $this->dispatch('banner-message', style: 'danger', message: 'Already created Cast!');
         }
+    }
+
+    public function showEditModal($id)
+    {
+        $this->castId = $id;
+        $this->loadCast();
+        $this->showCastModal = true;
+    }
+
+    public function loadCast()
+    {
+        $cast = Cast::findOrFail($this->castId);
+        $this->castName = $cast->name;
+        $this->castPosterPath = $cast->poster_path;
+    }
+
+    public function hiddenEditModal()
+    {
+        $this->showCastModal = false;
+        $this->reset();
+        $this->resetValidation();
+        Cast::latest()->paginate(5);
+    }
+
+    public function updateCast()
+    {
+        $this->validate();
+        $cast = Cast::findOrFail($this->castId);
+        $cast->update([
+            'name' => $this->castName,
+            'poster_path' => $this->castPosterPath
+        ]);
+
+        $this->showCastModal = false;
+        $this->reset();
+        $this->resetValidation();
+        Cast::latest()->paginate(5);
+
+        $this->dispatch('banner-message', style: 'success', message: 'Cast updated successfully!');
+    }
+
+    public function deleteCast($id)
+    {
+        Cast::findOrFail($id)->delete();
+        $this->dispatch('banner-message', style: 'success', message: 'Cast deleted successfully!');
     }
 
     public function render()
