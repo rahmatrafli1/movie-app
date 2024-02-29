@@ -18,6 +18,10 @@ class GenreIndex extends Component
     public $genreTitle;
     public $genreId;
 
+    public $search = '';
+    public $sort = 'asc';
+    public $perPage = 5;
+
     public $showGenreModal = false;
 
     protected $rules = [
@@ -38,7 +42,7 @@ class GenreIndex extends Component
             ]);
 
             $this->reset();
-            Genre::latest()->paginate(5);
+            Genre::paginate($this->perPage);
 
             $this->dispatch('banner-message', style: 'success', message: 'Genre created successfully!');
         } else {
@@ -64,7 +68,7 @@ class GenreIndex extends Component
         $this->showGenreModal = false;
         $this->reset();
         $this->resetValidation();
-        Genre::latest()->paginate(5);
+        Genre::paginate($this->perPage);
     }
 
     public function updateGenre()
@@ -79,7 +83,7 @@ class GenreIndex extends Component
         $this->showGenreModal = false;
         $this->reset();
         $this->resetValidation();
-        Genre::latest()->paginate(5);
+        Genre::paginate($this->perPage);
 
         $this->dispatch('banner-message', style: 'success', message: 'Genre updated successfully!');
     }
@@ -90,10 +94,15 @@ class GenreIndex extends Component
         $this->dispatch('banner-message', style: 'success', message: 'Genre deleted successfully!');
     }
 
+    public function resetFilters()
+    {
+        $this->reset(['search', 'sort', 'perPage']);
+    }
+
     public function render()
     {
         return view('livewire.genre-index', [
-            'genres' => Genre::latest()->paginate(5)
+            'genres' => Genre::search('title', $this->search)->orderBy('title', $this->sort)->paginate($this->perPage)
         ]);
     }
 }
