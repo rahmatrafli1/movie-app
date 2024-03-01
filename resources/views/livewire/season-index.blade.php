@@ -2,9 +2,8 @@
     <div class="w-full flex mb-4 p-2 justify-end">
         <form class="flex space-x-4 shadow bg-white rounded-md m-2 p-2">
             <div class="p-1 flex items-center">
-                <label for="season_tmdb_id" class="block text-sm font-medium text-gray-900 mr-4">Season TMDB
-                    ID</label>
-                <input wire:model="seasonTMDBId" type="text" name="season_tmdb_id" id="season_tmdb_id" autocomplete="off"
+                <label for="season_number" class="block text-sm font-medium text-gray-900 mr-4">Season Number</label>
+                <input wire:model="seasonNumber" type="text" name="season_number" id="season_number" autocomplete="off"
                     class="px-3 py-2 border border-gray-300 rounded">
             </div>
             <div class="p-1">
@@ -76,7 +75,8 @@
                                 {{ $season->name }}
                             </td>
                             <td class="px-4 py-3 border">
-                                <img src="" alt="{{ $season->name }}">
+                                <img src="https://image.tmdb.org/t/p/w500{{ $season->poster_path }}"
+                                    alt="{{ $season->name }}" class="h-16 w-16">
                             </td>
                             <td class="px-4 py-3 border">
                                 {{ $season->season_number }}
