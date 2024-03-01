@@ -6,9 +6,12 @@ use App\Models\Serie;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+use Livewire\WithPagination;
 
 class SerieIndex extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public $sort = 'asc';
     public $perPage = 5;
