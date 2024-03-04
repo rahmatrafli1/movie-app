@@ -36,25 +36,30 @@ class SeasonIndex extends Component
 
     public function generateSeason()
     {
-        $newSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key=' . $this->key)->json();
+        $newSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key=' . $this->key);
 
-        $season = Season::where('tmdb_id', $newSeason['id'])->first();
+        if ($newSeason->ok()) {
+            $season = Season::where('tmdb_id', $newSeason['id'])->first();
 
-        if (!$season) {
-            Season::create([
-                'tmdb_id' => $newSeason['id'],
-                'serie_id' => $this->serie->id,
-                'name' => $newSeason['name'],
-                'slug' => Str::slug($newSeason['name']),
-                'season_number' => $newSeason['season_number'],
-                'poster_path' => $newSeason['poster_path'] ? $newSeason['poster_path'] : $this->serie->poster_path,
-            ]);
+            if (!$season) {
+                Season::create([
+                    'tmdb_id' => $newSeason['id'],
+                    'serie_id' => $this->serie->id,
+                    'name' => $newSeason['name'],
+                    'slug' => Str::slug($newSeason['name']),
+                    'season_number' => $newSeason['season_number'],
+                    'poster_path' => $newSeason['poster_path'] ? $newSeason['poster_path'] : $this->serie->poster_path,
+                ]);
 
-            $this->reset(['seasonNumber']);
+                $this->reset(['seasonNumber']);
 
-            $this->dispatch('banner-message', style: 'success', message: 'Season created successfully!');
+                $this->dispatch('banner-message', style: 'success', message: 'Season created successfully!');
+            } else {
+                $this->dispatch('banner-message', style: 'danger', message: 'Already created Season!');
+            }
         } else {
-            $this->dispatch('banner-message', style: 'danger', message: 'Already created Season!');
+            $this->reset(['seasonNumber']);
+            $this->dispatch('banner-message', style: 'danger', message: 'API Season Number is Not Found!');
         }
     }
 

@@ -82,6 +82,8 @@
                                 {{ $season->season_number }}
                             </td>
                             <td class="px-4 py-3 border">
+                                <a href="{{ route('admin.episodes.index', [$serie->id, $season->id]) }}"
+                                    class="inline-flex items-center px-4 py-2 bg-slate-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-800 focus:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition ease-in-out duration-150">Episodes</a>
                                 <x-m-button wire:click="showEditModal({{ $season->id }})"
                                     class="bg-yellow-500 hover:bg-yellow-800">Edit</x-m-button>
                                 <x-d-button wire:click="deleteSeason({{ $season->id }})">Delete</x-d-button>
@@ -133,7 +135,8 @@
                             <label for="poster_path" class="block text-sm font-medium leading-6 text-gray-900">Poster
                                 Path</label>
                             <div class="mt-2">
-                                <input wire:model="seasonPosterPath" type="text" id="poster_path" autocomplete="off"
+                                <input wire:model="seasonPosterPath" type="text" id="poster_path"
+                                    autocomplete="off"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                             @error('seasonPosterPath')
