@@ -140,6 +140,14 @@
                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="sm:col-span-3">
+                            <div class="mt-2">
+                                <label for="public">Public</label>
+                                <input wire:model="isPublic" type="checkbox" id="public"
+                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                    value="1" @if ($this->isPublic == 1) checked @endif></input>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </x-slot>

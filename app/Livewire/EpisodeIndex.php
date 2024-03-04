@@ -25,8 +25,15 @@ class EpisodeIndex extends Component
     public $episodeName;
     public $episodeOverview;
     public $episodeId;
+    public $isPublic;
 
     public $showEpisodeModal = false;
+
+    protected $rules = [
+        'episodeName' => 'required',
+        'episodeNumber' => 'required|numeric',
+        'episodeOverview' => 'required',
+    ];
 
     protected $key = '1ad0503efe42ce09a3fc58e6c173a5da';
 
@@ -74,13 +81,39 @@ class EpisodeIndex extends Component
         $this->episodeName = $episodes->name;
         $this->episodeNumber = $episodes->episode_number;
         $this->episodeOverview = $episodes->overview;
+        $this->isPublic = $episodes->is_public;
     }
 
     public function hiddenEditModal()
     {
         $this->showEpisodeModal = false;
-        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview']);
+        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'isPublic']);
         $this->resetValidation();
+    }
+
+    public function updateEpisode()
+    {
+        $this->validate();
+        $episodes = Episode::findOrFail($this->episodeId);
+        $episodes->update([
+            'name' => $this->episodeName,
+            'slug' => Str::slug($this->episodeName),
+            'episode_number' => $this->episodeNumber,
+            'overview' => $this->episodeOverview,
+            'is_public' => $this->isPublic == 1 ? 1 : 0
+        ]);
+
+        $this->showEpisodeModal = false;
+        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'isPublic']);
+        $this->resetValidation();
+
+        $this->dispatch('banner-message', style: 'success', message: 'Episode updated successfully!');
+    }
+
+    public function deleteEpisode($id)
+    {
+        Episode::findOrFail($id)->delete();
+        $this->dispatch('banner-message', style: 'success', message: 'Episode deleted successfully!');
     }
 
     public function resetFilters()
