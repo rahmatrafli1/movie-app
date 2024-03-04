@@ -82,11 +82,9 @@
                                 {{ $season->season_number }}
                             </td>
                             <td class="px-4 py-3 border">
-                                <x-m-button wire:click="showDetailModal({{ $season->id }})"
-                                    class="bg-blue-500 hover:bg-blue-800">Show</x-m-button>
                                 <x-m-button wire:click="showEditModal({{ $season->id }})"
                                     class="bg-yellow-500 hover:bg-yellow-800">Edit</x-m-button>
-                                <x-d-button wire:click="deleteseasons({{ $season->id }})">Delete</x-d-button>
+                                <x-d-button wire:click="deleteSeason({{ $season->id }})">Delete</x-d-button>
                             </td>
                         </tr>
                     @empty
@@ -135,8 +133,7 @@
                             <label for="poster_path" class="block text-sm font-medium leading-6 text-gray-900">Poster
                                 Path</label>
                             <div class="mt-2">
-                                <input wire:model="seasonPosterPath" type="text" id="poster_path"
-                                    autocomplete="off"
+                                <input wire:model="seasonPosterPath" type="text" id="poster_path" autocomplete="off"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                             @error('seasonPosterPath')
@@ -148,25 +145,6 @@
             </x-slot>
             <x-slot name="footer">
                 <x-m-button wire:click="updateSeason" class="mx-2">Update</x-m-button>
-                <x-secondary-button wire:click="hiddenEditModal">Cancel</x-secondary-button>
-            </x-slot>
-        </form>
-    </x-dialog-modal>
-    <x-dialog-modal wire:model.live="showSeasonDetailModal">
-        <x-slot name="title">Detail Season</x-slot>
-        <form>
-            <x-slot name="content">
-                <div class="mt-10 sm:mt-0">
-                    <div class="mt-5 md:mt-0 md:col-span-2">
-                        <div class="sm:col-span-3 flex">
-                            <span class="font-bold pt-[2.5px]">Name:</span>
-                            <input type="text" wire:model="seasonName" id="season_name" disabled
-                                class="ml-2 border border-transparent p-0 w-full"></input>
-                        </div>
-                    </div>
-                </div>
-            </x-slot>
-            <x-slot name="footer">
                 <x-secondary-button wire:click="hiddenEditModal">Cancel</x-secondary-button>
             </x-slot>
         </form>
