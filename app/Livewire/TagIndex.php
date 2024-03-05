@@ -5,30 +5,30 @@ namespace App\Livewire;
 use App\Models\Tag;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 
 class TagIndex extends Component
 {
+    use WithPagination;
+
+    public $search = '';
+    public $sort = 'asc';
+    public $perPage = 5;
+
     public $showTagModal = false;
     public $tagName;
 
-    public $tags = [];
     public $tagId;
-
-    public function mount()
-    {
-        $this->tags = Tag::all();
-    }
 
     public function showCreateModal()
     {
         $this->showTagModal = true;
     }
 
-    public function hiddenCreateModal()
+    public function hiddenTagModal()
     {
         $this->showTagModal = false;
         $this->reset();
-        $this->tags = Tag::all();
     }
 
     public function createTag()
@@ -40,7 +40,6 @@ class TagIndex extends Component
 
         $this->reset();
         $this->showTagModal = false;
-        $this->tags = Tag::all();
 
         $this->dispatch('banner-message', style: 'success', message: 'Tags created successfully!');
     }
@@ -64,7 +63,6 @@ class TagIndex extends Component
 
         $this->reset();
         $this->showTagModal = false;
-        $this->tags = Tag::all();
 
         $this->dispatch('banner-message', style: 'success', message: 'Tags updated successfully!');
     }
@@ -74,13 +72,19 @@ class TagIndex extends Component
         $tag = Tag::findOrFail($tagId);
         $tag->delete();
         $this->reset();
-        $this->tags = Tag::all();
 
         $this->dispatch('banner-message', style: 'success', message: 'Tags deleted successfully!');
     }
 
+    public function resetFilters()
+    {
+        $this->reset(['search', 'sort', 'perPage']);
+    }
+
     public function render()
     {
-        return view('livewire.tag-index');
+        return view('livewire.tag-index', [
+            'tags' => Tag::search('tag_name', $this->search)->orderBy('tag_name', $this->sort)->paginate($this->perPage)
+        ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\TagIndex;
 use App\Livewire\CastIndex;
 use App\Livewire\GenreIndex;
 use App\Livewire\MovieIndex;
@@ -8,7 +9,6 @@ use App\Livewire\SeasonIndex;
 use App\Livewire\EpisodeIndex;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Livewire\TagIndex;
 
 /*
 |--------------------------------------------------------------------------
