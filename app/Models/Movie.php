@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['tmdb_id', 'title', 'release_date', 'runtime', 'lang', 'is_public', 'slug', 'rating', 'poster_path', 'backdrop_path', 'overview'];
 }

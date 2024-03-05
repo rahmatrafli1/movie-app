@@ -47,7 +47,7 @@ class EpisodeIndex extends Component
             if (!$episode) {
                 Episode::create([
                     'tmdb_id' => $newEpisode['id'],
-                    'season_id' => $this->season->season_number,
+                    'season_id' => $this->season->id,
                     'name' => $newEpisode['name'],
                     'episode_number' => $newEpisode['episode_number'],
                     'slug' => Str::slug($newEpisode['name']),
@@ -124,7 +124,7 @@ class EpisodeIndex extends Component
     public function render()
     {
         return view('livewire.episode-index', [
-            'episodes' => Episode::where(['season_id' => $this->season->season_number])->search('name', $this->search)->orderBy('episode_number', $this->sort)->paginate($this->perPage)
+            'episodes' => Episode::where('season_id', $this->season->id)->search('name', $this->search)->orderBy('episode_number', $this->sort)->paginate($this->perPage)
         ]);
     }
 }

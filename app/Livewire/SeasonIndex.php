@@ -36,12 +36,14 @@ class SeasonIndex extends Component
 
     public function generateSeason()
     {
-        $newSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key=' . $this->key);
+        $apiSeason = Http::get('https://api.themoviedb.org/3/tv/' . $this->serie->tmdb_id . '/season/' . $this->seasonNumber . '?api_key=' . $this->key);
 
-        if ($newSeason->ok()) {
-            $season = Season::where('tmdb_id', $newSeason['id'])->first();
+        if ($apiSeason->ok()) {
+            $newSeason = $apiSeason->json();
 
-            if (!$season) {
+            $check_season = Season::where('tmdb_id', $newSeason['id'])->first();
+
+            if (!$check_season) {
                 Season::create([
                     'tmdb_id' => $newSeason['id'],
                     'serie_id' => $this->serie->id,
@@ -55,7 +57,7 @@ class SeasonIndex extends Component
 
                 $this->dispatch('banner-message', style: 'success', message: 'Season created successfully!');
             } else {
-                $this->dispatch('banner-message', style: 'danger', message: 'Already created Season!');
+                $this->dispatch('banner-message', style: 'danger', message: 'Season already created!');
             }
         } else {
             $this->reset(['seasonNumber']);
