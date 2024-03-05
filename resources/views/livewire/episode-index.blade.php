@@ -75,7 +75,13 @@
                                 {{ $episode->name }}
                             </td>
                             <td class="px-4 py-3 border">
-                                {{ $episode->is_public == 1 ? 'Yes' : 'No' }}
+                                @if ($episode->is_public == 1)
+                                    <span
+                                        class="bg-green-200 text-center text-green-800 rounded-full grid font-bold">Yes</span>
+                                @else
+                                    <span
+                                        class="bg-red-200 text-center text-red-800 rounded-full grid font-bold">No</span>
+                                @endif
                             </td>
                             <td class="px-4 py-3 border">
                                 {{ $episode->episode_number }}
@@ -141,11 +147,12 @@
                             @enderror
                         </div>
                         <div class="sm:col-span-3">
-                            <div class="mt-2">
-                                <label for="public">Public</label>
-                                <input wire:model="isPublic" type="checkbox" id="public"
-                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
-                                    value="1" @if ($this->isPublic == 1) checked @endif></input>
+                            <div class="my-2">
+                                Public
+                                <input type="radio" value="1" id="IsPublic1" wire:model="episodeIsPublic">
+                                Yes
+                                <input type="radio" value="0" id="IsPublic2" wire:model="episodeIsPublic"> No
+
                             </div>
                         </div>
                     </div>

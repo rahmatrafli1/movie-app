@@ -25,7 +25,7 @@ class EpisodeIndex extends Component
     public $episodeName;
     public $episodeOverview;
     public $episodeId;
-    public $isPublic;
+    public $episodeIsPublic;
 
     public $showEpisodeModal = false;
 
@@ -81,13 +81,13 @@ class EpisodeIndex extends Component
         $this->episodeName = $episodes->name;
         $this->episodeNumber = $episodes->episode_number;
         $this->episodeOverview = $episodes->overview;
-        $this->isPublic = $episodes->is_public;
+        $this->episodeIsPublic = $episodes->is_public;
     }
 
     public function hiddenEditModal()
     {
         $this->showEpisodeModal = false;
-        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'isPublic']);
+        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'episodeIsPublic']);
         $this->resetValidation();
     }
 
@@ -100,11 +100,11 @@ class EpisodeIndex extends Component
             'slug' => Str::slug($this->episodeName),
             'episode_number' => $this->episodeNumber,
             'overview' => $this->episodeOverview,
-            'is_public' => $this->isPublic == 1 ? 1 : 0
+            'is_public' => $this->episodeIsPublic
         ]);
 
         $this->showEpisodeModal = false;
-        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'isPublic']);
+        $this->reset(['episodeName', 'episodeNumber', 'episodeOverview', 'episodeIsPublic']);
         $this->resetValidation();
 
         $this->dispatch('banner-message', style: 'success', message: 'Episode updated successfully!');
