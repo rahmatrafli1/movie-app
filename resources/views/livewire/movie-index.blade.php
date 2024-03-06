@@ -52,9 +52,60 @@
                 <thead>
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('title')">Title</th>
-                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('rating')">Rating</th>
-                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('visits')">Visits</th>
+                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('title')">
+                            <div class="flex space-x-4 content-center">
+                                <span>Title</span>
+                                @if ($sortBycolumn == 'title' && $sort == 'desc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                    </svg>
+                                @elseif($sortBycolumn == 'title' && $sort == 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+                                    </svg>
+                                @endif
+                            </div>
+                        </th>
+                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('rating')">
+                            <div class="flex space-x-4 content-center">
+                                <span>Rating</span>
+                                @if ($sortBycolumn == 'rating' && $sort == 'desc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                    </svg>
+                                @elseif($sortBycolumn == 'rating' && $sort == 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+                                    </svg>
+                                @endif
+                            </div>
+                        </th>
+                        <th class="px-4 py-3 cursor-pointer" wire:click="sortByColumn('visits')">
+                            <div class="flex space-x-4 content-center">
+                                <span>Visits</span>
+                                @if ($sortBycolumn == 'visits' && $sort == 'desc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                    </svg>
+                                @elseif($sortBycolumn == 'visits' && $sort == 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+                                    </svg>
+                                @endif
+                            </div>
+                        </th>
                         <th class="px-4 py-3">Runtime</th>
                         <th class="px-4 py-3">Public</th>
                         <th class="px-4 py-3">Poster</th>
@@ -122,7 +173,8 @@
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="movie-name" class="block text-sm font-medium text-gray-700">Movie
                                             Name</label>
-                                        <input wire:model="movieName" type="text" autocomplete="off" id="movie-name"
+                                        <input wire:model="movieName" type="text" autocomplete="off"
+                                            id="movie-name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                         @error('movieName')
                                             <span class="text-red-600 text-sm">{{ $message }}</span>
