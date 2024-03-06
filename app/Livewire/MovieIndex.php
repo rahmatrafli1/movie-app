@@ -136,8 +136,7 @@ class MovieIndex extends Component
     public function updateMovie()
     {
         $this->validate();
-        $movies = Movie::findOrFail($this->movieId);
-        $movies->update([
+        $this->movie->update([
             'title' => $this->movieName,
             'slug' => Str::slug($this->movieName),
             'release_date' => $this->movieReleaseDate,
