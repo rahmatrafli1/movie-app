@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Genre;
 use App\Models\Movie;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -20,6 +21,7 @@ class MovieIndex extends Component
 
     public $showMovieModal = false;
 
+    public $movie;
     public $movieId;
 
     public $movieTMDBId;
@@ -65,7 +67,7 @@ class MovieIndex extends Component
         if ($movies->ok()) {
             $newMovies = $movies->json();
 
-            Movie::create([
+            $created_movies = Movie::create([
                 'tmdb_id' => $newMovies['id'],
                 'title' => $newMovies['title'],
                 'release_date' => $newMovies['release_date'],
@@ -80,6 +82,11 @@ class MovieIndex extends Component
                 'backdrop_path' => $newMovies['backdrop_path'],
                 'overview' => $newMovies['overview']
             ]);
+
+            $tmdb_genres = $newMovies['genres'];
+            $tmdb_genres_ids = collect($tmdb_genres)->pluck('id');
+            $genres = Genre::whereIn('tmdb_id', $tmdb_genres_ids)->get();
+            $created_movies->genres()->attach($genres);
 
             $this->reset(['movieTMDBId']);
 
@@ -106,25 +113,24 @@ class MovieIndex extends Component
 
     public function showEditModal($id)
     {
-        $this->movieId = $id;
+        $this->movie = Movie::findOrFail($id);
         $this->loadMovies();
         $this->showMovieModal = true;
     }
 
     public function loadMovies()
     {
-        $movies = Movie::findOrFail($this->movieId);
-        $this->movieName = $movies->title;
-        $this->movieReleaseDate = $movies->release_date;
-        $this->movieRuntime = $movies->runtime;
-        $this->movieLanguage = $movies->lang;
-        $this->movieIsPublic = $movies->is_public;
-        $this->movieRating = $movies->rating;
-        $this->movieFormat = $movies->video_format;
-        $this->movieVisits = $movies->visits;
-        $this->moviePosterPath = $movies->poster_path;
-        $this->movieBackdropPosterPath = $movies->backdrop_path;
-        $this->movieOverview = $movies->overview;
+        $this->movieName = $this->movie->title;
+        $this->movieReleaseDate = $this->movie->release_date;
+        $this->movieRuntime = $this->movie->runtime;
+        $this->movieLanguage = $this->movie->lang;
+        $this->movieIsPublic = $this->movie->is_public;
+        $this->movieRating = $this->movie->rating;
+        $this->movieFormat = $this->movie->video_format;
+        $this->movieVisits = $this->movie->visits;
+        $this->moviePosterPath = $this->movie->poster_path;
+        $this->movieBackdropPosterPath = $this->movie->backdrop_path;
+        $this->movieOverview = $this->movie->overview;
     }
 
     public function updateMovie()
