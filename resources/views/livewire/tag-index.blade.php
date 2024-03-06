@@ -67,8 +67,8 @@
                             <td class="px-4 py-3 text-ms font-semibold border">{{ $tag->slug }}</td>
 
                             <td class="px-4 py-3 text-sm border">
-                                <x-m-button wire:click="showEditModal({{ $tag->id }})"
-                                    class="bg-green-500 hover:bg-green-700 text-white">Edit</x-m-button>
+                                <button type="button" wire:click="showEditModal({{ $tag->id }})"
+                                    class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-800 focus:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">Edit</button>
                                 <x-m-button wire:click="deleteTag({{ $tag->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
                             </td>
@@ -110,8 +110,9 @@
 
         </x-slot>
         <x-slot name="footer">
-            <x-m-button wire:click="hiddenTagModal"
-                class="bg-gray-600 hover:bg-gray-800 text-white mr-2">Cancel</x-m-button>
+            <button wire:click="hiddenTagModal"
+                class="inline-flex items-center px-4 py-2 bg-slate-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-800 focus:bg-slate-700 active:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-2"
+                type="button">Cancel</button>
             @if ($tagId)
                 <x-m-button wire:click="updateTag">Update</x-m-button>
             @else

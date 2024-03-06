@@ -14,7 +14,9 @@ class MovieIndex extends Component
 
     public $search = '';
     public $sort = 'asc';
+    public $sortBycolumn = 'title';
     public $perPage = 5;
+
 
     public $showMovieModal = false;
 
@@ -25,6 +27,7 @@ class MovieIndex extends Component
     public $movieRuntime;
     public $movieLanguage;
     public $movieFormat;
+    public $movieVisits;
     public $movieRating;
     public $movieReleaseDate;
     public $moviePosterPath;
@@ -39,6 +42,7 @@ class MovieIndex extends Component
         'movieRuntime' => 'required|numeric',
         'movieLanguage' => 'required',
         'movieFormat' => 'required',
+        'movieVisits' => 'required|numeric',
         'movieRating' => 'required|decimal:1|numeric',
         'movieReleaseDate' => 'required|date',
         'moviePosterPath' => 'required',
@@ -47,10 +51,11 @@ class MovieIndex extends Component
 
     public function generateMovie()
     {
-        $movie = Movie::where('tmdb_id', $this->movieTMDBId)->first();
+        $movie = Movie::where('tmdb_id', $this->movieTMDBId)->exists();
 
         if ($movie) {
             $this->dispatch('banner-message', style: 'danger', message: 'Movie already created!');
+            return;
         }
 
         $url = 'https://api.themoviedb.org/3/movie/';
@@ -79,7 +84,19 @@ class MovieIndex extends Component
             $this->reset(['movieTMDBId']);
 
             $this->dispatch('banner-message', style: 'success', message: 'Movie created successfully!');
+        } else {
+            $this->dispatch('banner-message', style: 'danger', message: 'API Movie cannot found!');
         }
+    }
+
+    public function sortByColumn($column)
+    {
+        if ($this->sortBycolumn = $column) {
+            $this->sort = $this->sort === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sort = 'asc';
+        }
+        $this->sortBycolumn = $column;
     }
 
     public function showCreateModal()
@@ -104,6 +121,7 @@ class MovieIndex extends Component
         $this->movieIsPublic = $movies->is_public;
         $this->movieRating = $movies->rating;
         $this->movieFormat = $movies->video_format;
+        $this->movieVisits = $movies->visits;
         $this->moviePosterPath = $movies->poster_path;
         $this->movieBackdropPosterPath = $movies->backdrop_path;
         $this->movieOverview = $movies->overview;
@@ -121,6 +139,7 @@ class MovieIndex extends Component
             'lang' => $this->movieLanguage,
             'is_public' => $this->movieIsPublic,
             'video_format' => $this->movieFormat,
+            'visits' => $this->movieVisits,
             'rating' => $this->movieRating,
             'poster_path' => $this->moviePosterPath,
             'backdrop_path' => $this->movieBackdropPosterPath,
@@ -147,15 +166,10 @@ class MovieIndex extends Component
         $this->dispatch('banner-message', style: 'success', message: 'Movie deleted successfully!');
     }
 
-    public function resetFilters()
-    {
-        $this->reset(['search', 'sort', 'perPage']);
-    }
-
     public function render()
     {
         return view('livewire.movie-index', [
-            'movies' => Movie::search('title', $this->search)->orderBy('title', $this->sort)->paginate($this->perPage)
+            'movies' => Movie::search('title', $this->search)->orderBy($this->sortBycolumn, $this->sort)->paginate($this->perPage)
         ]);
     }
 }
