@@ -140,6 +140,8 @@
                                     alt="{{ $movie->title }}" class="h-16 w-16">
                             </td>
                             <td class="px-4 py-3 text-sm border">
+                                <button type="button" wire:click="showTrailerModal({{ $movie->id }})"
+                                    class="inline-flex items-center px-4 py-2 bg-blue-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">Trailer</button>
                                 <button type="button" wire:click="showEditModal({{ $movie->id }})"
                                     class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-800 focus:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">Edit</button>
                                 <x-m-button wire:click="deleteMovie({{ $movie->id }})"
@@ -314,6 +316,22 @@
                 class="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-2"
                 type="button">Cancel</button>
             <x-m-button wire:click="updateMovie">Update</x-m-button>
+        </x-slot>
+    </x-dialog-modal>
+    <x-dialog-modal wire:model="showTrailer">
+        <x-slot name="title">Trailer Movie</x-slot>
+        <x-slot name="content">
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    Form
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button wire:click="hiddenMovieModal"
+                class="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-2"
+                type="button">Cancel</button>
+            <x-m-button wire:click="addTrailer">Add Trailer</x-m-button>
         </x-slot>
     </x-dialog-modal>
 </section>

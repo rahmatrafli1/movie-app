@@ -20,6 +20,7 @@ class MovieIndex extends Component
 
 
     public $showMovieModal = false;
+    public $showTrailer = false;
 
     public $movie;
     public $movieId;
@@ -109,6 +110,16 @@ class MovieIndex extends Component
     public function showCreateModal()
     {
         $this->showMovieModal = true;
+    }
+
+    public function showTrailerModal($id)
+    {
+        $this->showTrailer = true;
+    }
+
+    public function addTrailer()
+    {
+        $this->reset();
     }
 
     public function showEditModal($id)
