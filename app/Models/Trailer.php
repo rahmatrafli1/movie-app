@@ -9,7 +9,9 @@ class Trailer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['web_name', 'web_url'];
+    protected $guarded = [];
+
+    protected $table = 'trailers_urls';
 
     public function trailerable()
     {

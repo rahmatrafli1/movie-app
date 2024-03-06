@@ -38,6 +38,9 @@ class MovieIndex extends Component
     public $movieIsPublic;
     public $movieOverview;
 
+    public $trailerName;
+    public $trailerEmbedHTML;
+
     protected $key = '1ad0503efe42ce09a3fc58e6c173a5da';
 
     protected $rules = [
@@ -114,12 +117,22 @@ class MovieIndex extends Component
 
     public function showTrailerModal($id)
     {
+        $this->movie = Movie::findOrFail($id);
         $this->showTrailer = true;
     }
 
     public function addTrailer()
     {
-        $this->reset();
+        $this->movie->trailers()->create([
+            'name' => $this->trailerName,
+            'embed_html' => $this->trailerEmbedHTML
+        ]);
+
+        $this->reset(['trailerName', 'trailerEmbedHTML']);
+
+        $this->showTrailer = false;
+
+        $this->dispatch('banner-message', style: 'success', message: 'Trailer created successfully!');
     }
 
     public function showEditModal($id)

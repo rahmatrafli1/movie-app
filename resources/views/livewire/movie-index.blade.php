@@ -323,7 +323,37 @@
         <x-slot name="content">
             <div class="mt-10 sm:mt-0">
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    Form
+                    <form>
+                        <div class="shadow overflow-hidden sm:rounded-md">
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <div class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="trailer-name"
+                                            class="block text-sm font-medium text-gray-700">Trailer
+                                            Name</label>
+                                        <input wire:model="trailerName" type="text" autocomplete="off"
+                                            id="trailer-name"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                        @error('trailerName')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="embed-html" class="block text-sm font-medium text-gray-700">Embed
+                                            HTML</label>
+                                        <input wire:model="trailerEmbedHTML" type="text" autocomplete="off"
+                                            id="embed-html"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                        @error('trailerEmbedHTML')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </x-slot>
