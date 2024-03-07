@@ -9,6 +9,7 @@ use App\Livewire\SeasonIndex;
 use App\Livewire\EpisodeIndex;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,7 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
