@@ -57,7 +57,7 @@ class MovieIndex extends Component
         'movieOverview' => 'required'
     ];
 
-    protected $listeners = ['tagAdded' => 'tagAdded', 'tagDetached' => 'tagDetached'];
+    protected $listeners = ['tagAdded' => 'tagAdded', 'tagDetached' => 'tagDetached', 'castAdded' => 'castAdded', 'castDetached' => 'castDetached'];
 
     public function generateMovie()
     {
@@ -225,9 +225,25 @@ class MovieIndex extends Component
         $this->showMovieModal = false;
     }
 
+    public function castAdded()
+    {
+        $this->dispatch('banner-message', style: 'success', message: 'Cast added successfully!');
+        $this->reset();
+
+        $this->showMovieModal = false;
+    }
+
     public function tagDetached()
     {
         $this->dispatch('banner-message', style: 'success', message: 'Tag deleted successfully!');
+        $this->reset();
+
+        $this->showMovieModal = false;
+    }
+
+    public function castDetached()
+    {
+        $this->dispatch('banner-message', style: 'success', message: 'Cast deleted successfully!');
         $this->reset();
 
         $this->showMovieModal = false;
