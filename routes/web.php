@@ -9,6 +9,10 @@ use App\Livewire\SeasonIndex;
 use App\Livewire\EpisodeIndex;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CastController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\SerieController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -22,7 +26,11 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/series', [SerieController::class, 'index'])->name('series.index');
+Route::get('/casts', [CastController::class, 'index'])->name('casts.index');
+Route::get('/genre/{slug}', [GenreController::class, 'show'])->name('genres.show');
 
 Route::middleware([
     'auth:sanctum',
