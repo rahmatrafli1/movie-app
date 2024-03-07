@@ -168,147 +168,161 @@
         <x-slot name="title">Update Movie</x-slot>
         <x-slot name="content">
             <div class="mt-10 sm:mt-0">
-                <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form>
-                        <div class="shadow overflow-hidden sm:rounded-md">
-                            <div class="px-4 py-5 bg-white sm:p-6">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="movie-name" class="block text-sm font-medium text-gray-700">Movie
-                                            Name</label>
-                                        <input wire:model="movieName" type="text" autocomplete="off"
-                                            id="movie-name"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieName')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="runtime"
-                                            class="block text-sm font-medium text-gray-700">Runtime</label>
-                                        <input wire:model="movieRuntime" type="text" autocomplete="off"
-                                            id="runtime"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieRuntime')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="lang"
-                                            class="block text-sm font-medium text-gray-700">Language</label>
-                                        <input wire:model="movieLanguage" type="text" autocomplete="off"
-                                            id="lang"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieLanguage')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="video-format"
-                                            class="block text-sm font-medium text-gray-700">Format</label>
-                                        <input wire:model="movieFormat" type="text" autocomplete="off"
-                                            id="video-format"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieFormat')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="visits"
-                                            class="block text-sm font-medium text-gray-700">Visits</label>
-                                        <input wire:model="movieVisits" type="text" autocomplete="off"
-                                            id="visits"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieVisits')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="rating"
-                                            class="block text-sm font-medium text-gray-700">Rating</label>
-                                        <input wire:model="movieRating" type="text" autocomplete="off"
-                                            id="rating"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieRating')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="release_date"
-                                            class="block text-sm font-medium text-gray-700">Release Date</label>
-                                        <input wire:model="movieReleaseDate" type="text" autocomplete="off"
-                                            id="release_date"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieReleaseDate')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="poster" class="block text-sm font-medium text-gray-700">Poster
-                                            Path</label>
-                                        <input wire:model="moviePosterPath" type="text" autocomplete="off"
-                                            id="poster"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('moviePosterPath')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="backdrop_poster"
-                                            class="block text-sm font-medium text-gray-700">Backdrop Poster
-                                            Path</label>
-                                        <input wire:model="movieBackdropPosterPath" type="text" autocomplete="off"
-                                            id="backdrop_poster"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                                        @error('movieBackdropPosterPath')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="sm:col-span-3">
-                                    <label for="overview"
-                                        class="block text-sm font-medium leading-6 text-gray-900">Overview</label>
-                                    <div class="mt-2">
-                                        <textarea wire:model="movieOverview" type="text" id="overview" autocomplete="off"
-                                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                                        @error('movieOverview')
-                                            <span class="text-red-600 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
+                <div class="mt-5 md:mt-0 md:col-span-2" x-data="{ tab: 0 }">
+                    <div class="flex shadow overflow-hidden sm:rounded-md">
+                        <button class="px-4 py-2 w-full" x-on:click.prevent="tab = 0">Form</button>
+                        <button class="px-4 py-2 w-full" x-on:click.prevent="tab = 1">Tags</button>
+                    </div>
+                    <div>
+                        <div class="p-4 space-x-2" x-show="tab === 0">
+                            <form>
+                                <div class="shadow overflow-hidden sm:rounded-md">
+                                    <div class="px-4 py-5 bg-white sm:p-6">
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="movie-name"
+                                                    class="block text-sm font-medium text-gray-700">Movie
+                                                    Name</label>
+                                                <input wire:model="movieName" type="text" autocomplete="off"
+                                                    id="movie-name"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieName')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="runtime"
+                                                    class="block text-sm font-medium text-gray-700">Runtime</label>
+                                                <input wire:model="movieRuntime" type="text" autocomplete="off"
+                                                    id="runtime"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieRuntime')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="lang"
+                                                    class="block text-sm font-medium text-gray-700">Language</label>
+                                                <input wire:model="movieLanguage" type="text" autocomplete="off"
+                                                    id="lang"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieLanguage')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="video-format"
+                                                    class="block text-sm font-medium text-gray-700">Format</label>
+                                                <input wire:model="movieFormat" type="text" autocomplete="off"
+                                                    id="video-format"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieFormat')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="visits"
+                                                    class="block text-sm font-medium text-gray-700">Visits</label>
+                                                <input wire:model="movieVisits" type="text" autocomplete="off"
+                                                    id="visits"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieVisits')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="rating"
+                                                    class="block text-sm font-medium text-gray-700">Rating</label>
+                                                <input wire:model="movieRating" type="text" autocomplete="off"
+                                                    id="rating"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieRating')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="release_date"
+                                                    class="block text-sm font-medium text-gray-700">Release
+                                                    Date</label>
+                                                <input wire:model="movieReleaseDate" type="text"
+                                                    autocomplete="off" id="release_date"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieReleaseDate')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="poster"
+                                                    class="block text-sm font-medium text-gray-700">Poster
+                                                    Path</label>
+                                                <input wire:model="moviePosterPath" type="text" autocomplete="off"
+                                                    id="poster"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('moviePosterPath')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="backdrop_poster"
+                                                    class="block text-sm font-medium text-gray-700">Backdrop Poster
+                                                    Path</label>
+                                                <input wire:model="movieBackdropPosterPath" type="text"
+                                                    autocomplete="off" id="backdrop_poster"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                @error('movieBackdropPosterPath')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="sm:col-span-3">
-                                            <div class="my-2">
-                                                Public
-                                                <input type="radio" value="1" id="IsPublic1"
-                                                    wire:model="movieIsPublic">
-                                                Yes
-                                                <input type="radio" value="0" id="IsPublic2"
-                                                    wire:model="movieIsPublic"> No
+                                            <label for="overview"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Overview</label>
+                                            <div class="mt-2">
+                                                <textarea wire:model="movieOverview" type="text" id="overview" autocomplete="off"
+                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                                @error('movieOverview')
+                                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <div class="sm:col-span-3">
+                                                    <div class="my-2">
+                                                        Public
+                                                        <input type="radio" value="1" id="IsPublic1"
+                                                            wire:model="movieIsPublic">
+                                                        Yes
+                                                        <input type="radio" value="0" id="IsPublic2"
+                                                            wire:model="movieIsPublic"> No
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                        <div class="p-4 space-x-2" x-show="tab === 1">
+                            <livewire:movie-tag />
+                        </div>
+                    </div>
                 </div>
             </div>
         </x-slot>
