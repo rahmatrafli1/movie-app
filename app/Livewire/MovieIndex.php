@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\Trailer;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
@@ -21,6 +22,7 @@ class MovieIndex extends Component
 
     public $showMovieModal = false;
     public $showTrailer = false;
+    public $showMovieDetail = false;
 
     public $movie;
     public $movieId;
@@ -135,11 +137,29 @@ class MovieIndex extends Component
         $this->dispatch('banner-message', style: 'success', message: 'Trailer created successfully!');
     }
 
+    public function deleteTrailer($id)
+    {
+        $trailer = Trailer::findOrFail($id);
+        $trailer->delete();
+
+        $this->reset();
+
+        $this->showTrailer = false;
+
+        $this->dispatch('banner-message', style: 'success', message: 'Trailer deleted successfully!');
+    }
+
     public function showEditModal($id)
     {
         $this->movie = Movie::findOrFail($id);
         $this->loadMovies();
         $this->showMovieModal = true;
+    }
+
+    public function showMoviesDetail($id)
+    {
+        $this->movie = Movie::findOrFail($id);
+        $this->showMovieDetail = true;
     }
 
     public function loadMovies()

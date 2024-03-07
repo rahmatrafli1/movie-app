@@ -116,7 +116,8 @@
                     @forelse ($movies as $movie)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 border">
-                                {{ $movie->title }}
+                                <span wire:click="showMoviesDetail({{ $movie->id }})"
+                                    class="text-blue-500 hover:text-blue-700 cursor-pointer">{{ $movie->title }}</span>
                             </td>
                             <td class="px-4 py-3 border">
                                 {{ $movie->rating }}
@@ -321,6 +322,15 @@
     <x-dialog-modal wire:model="showTrailer">
         <x-slot name="title">Trailer Movie</x-slot>
         <x-slot name="content">
+            @if ($movie)
+                <div class="flex space-x-4 space-y-2 m-2">
+                    @foreach ($movie->trailers as $trailer)
+                        <x-button wire:click="deleteTrailer({{ $trailer->id }})" class="hover:bg-red-500">
+                            {{ $trailer->name }}
+                        </x-button>
+                    @endforeach
+                </div>
+            @endif
             <div class="mt-10 sm:mt-0">
                 <div class="mt-5 md:mt-0 md:col-span-2">
                     <form>
@@ -362,6 +372,23 @@
                 class="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-2"
                 type="button">Cancel</button>
             <x-m-button wire:click="addTrailer">Add Trailer</x-m-button>
+        </x-slot>
+    </x-dialog-modal>
+    <x-dialog-modal wire:model="showMovieDetail">
+        <x-slot name="title">Movie Detail</x-slot>
+        <x-slot name="content">
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    @if ($movie)
+                        {{ $movie->title }}
+                    @endif
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button wire:click="hiddenMovieModal"
+                class="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-2"
+                type="button">Back</button>
         </x-slot>
     </x-dialog-modal>
 </section>
