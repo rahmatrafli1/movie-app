@@ -57,6 +57,8 @@ class MovieIndex extends Component
         'movieOverview' => 'required'
     ];
 
+    protected $listeners = ['tagAdded' => 'tagAdded', 'tagDetached' => 'tagDetached'];
+
     public function generateMovie()
     {
         $movie = Movie::where('tmdb_id', $this->movieTMDBId)->exists();
@@ -213,6 +215,22 @@ class MovieIndex extends Component
     {
         Movie::findOrFail($id)->delete();
         $this->dispatch('banner-message', style: 'success', message: 'Movie deleted successfully!');
+    }
+
+    public function tagAdded()
+    {
+        $this->dispatch('banner-message', style: 'success', message: 'Tag added successfully!');
+        $this->reset();
+
+        $this->showMovieModal = false;
+    }
+
+    public function tagDetached()
+    {
+        $this->dispatch('banner-message', style: 'success', message: 'Tag deleted successfully!');
+        $this->reset();
+
+        $this->showMovieModal = false;
     }
 
     public function render()

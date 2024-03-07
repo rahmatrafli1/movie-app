@@ -25,7 +25,14 @@ class MovieTag extends Component
     {
         $tag = Tag::findOrFail($id);
         $this->movie->tags()->attach($tag);
-        $this->reset();
+        $this->reset('queryTag');
+        $this->dispatch('tagAdded');
+    }
+
+    public function detachTag($id)
+    {
+        $this->movie->tags()->detach($id);
+        $this->dispatch('tagDetached');
     }
 
     public function render()

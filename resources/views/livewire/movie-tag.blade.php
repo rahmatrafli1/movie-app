@@ -1,5 +1,14 @@
 <div>
-    <input wire:model.live="queryTag" type="text" class="m-2 p-2 rounded w-full" placeholder="Search Tag">
+    <div class="flex flex-wrap space-x-2 m-2">
+        @forelse ($movie->tags as $mtag)
+            <x-button wire:click="detachTag({{ $mtag->id }})"
+                class="hover:bg-red-500">{{ $mtag->tag_name }}</x-button>
+        @empty
+            No Tag
+        @endforelse
+    </div>
+
+    <input wire:model.live="queryTag" type="text" class="rounded w-full" placeholder="Search Tag">
 
     @if (!empty($queryTag))
         <div class="w-full">
