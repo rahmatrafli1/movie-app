@@ -5,7 +5,19 @@
                 <h1>Movies</h1>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 rounded">
-                Movie Cards
+                <x-movie-card>
+                    <x-slot name="image">
+                        <div class="aspect-w-2 aspect-h-3">
+                            <img src="https://cdn.pixabay.com/photo/2021/10/13/07/43/couple-6705694_1280.jpg"
+                                alt="movies" class="object-cover" />
+                            <div class="absolute left-0 top-0 h-8 w-12 bg-gray-800 text-blue-400 text-center font-bold">
+                                New</div>
+                        </div>
+                    </x-slot>
+                    <a href="/">
+                        <div class="dark:text-white font-bold group-hover:text-blue-400">Movie Title</div>
+                    </a>
+                </x-movie-card>
             </div>
         </section>
         <section class="bg-gray-200 dark:bg-gray-900 mt-4 dark:text-white p-2 rounded">
