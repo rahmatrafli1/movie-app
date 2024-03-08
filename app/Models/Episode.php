@@ -10,4 +10,9 @@ class Episode extends Model
     use HasFactory;
 
     protected $fillable = ['tmdb_id', 'season_id', 'name', 'episode_number', 'slug', 'overview', 'is_public', 'visits'];
+
+    public function season()
+    {
+        return $this->belongsTo(Season::class);
+    }
 }
