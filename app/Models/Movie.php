@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Movie extends Model
 {
@@ -23,7 +24,7 @@ class Movie extends Model
         return $this->morphMany(Trailer::class, 'trailerable');
     }
 
-    public function tags()
+    public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }

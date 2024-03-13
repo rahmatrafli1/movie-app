@@ -21,14 +21,18 @@
                                             {{ $genre->title }},
                                         @endforeach
                                     </span>
-                                    <span class="ml-2">
-                                        {{ $movie->runtime }}
+                                    <span class="flex space-x-2">
+                                        {{ date('H:i:s', mktime(0, $movie->runtime)) }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
                                     </span>
                                 </div>
                                 <div class="flex space-x-4">
                                     @foreach ($movie->trailers as $trailer)
-                                        <button type="button"
-                                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-white border border-transparent rounded-md font-semibold text-xs text-white dark:text-black uppercase tracking-widest hover:bg-gray-700 hover:dark:bg-black hover:dark:text-white focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ $trailer->name }}</button>
+                                        <livewire:movie-trailer :trailer="$trailer"></livewire:movie-trailer>
                                     @endforeach
                                 </div>
                             </div>
@@ -40,9 +44,9 @@
                     </div>
                 </div>
             </section>
-            <section class="max-w-6xl mx-auto">
-                <div class="flex">
-                    <div class="w-8/12">
+            <section class="max-w-6xl mx-auto bg-gray-200 dark:bg-gray-900 p-2 rounded">
+                <div class="flex justify-between">
+                    <div class="w-7/12">
                         <h1 class="flex dark:text-white font-bold text-xl">Movie Casts</h1>
                         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
                             @foreach ($movie->casts as $cast)
@@ -58,8 +62,28 @@
                     </div>
                     <div class="w-4/12">
                         <h1 class="flex dark:text-white font-bold text-xl">Latest Movie</h1>
+                        <div class="grid grid-cols-3 gap-3">
+                            @if (!empty($latestMovies))
+                                @foreach ($latestMovies as $movie)
+                                    <a href="{{ route('movies.show', $movie->slug) }}">
+                                        <img class="w-full h-full rounded-lg"
+                                            src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{ $movie->poster_path }}"
+                                            alt="{{ $movie->title }}">
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
+            </section>
+            <section class="max-w-6xl mx-auto bg-yellow-600 text-indigo-600 mt-6 p-2">
+                @if (!empty($movie))
+                    @foreach ($movie->tags as $tag)
+                        <span class="font-bold hover:text-indigo-200 cursor-pointer">#{{ $tag->tag_name }}</span>
+                    @endforeach
+                @elseif(empty($movie))
+                    <span>No Tag</span>
+                @endif
             </section>
         </main>
     @endif
