@@ -5,7 +5,7 @@
                 @foreach ($series as $serie)
                     <x-movie-card>
                         <x-slot name="image">
-                            <a href="">
+                            <a href="{{ route('series.show', $serie->slug) }}">
                                 <div class="aspect-w-2 aspect-h-3">
                                     <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{ $serie->poster_path }}"
                                         alt="{{ $serie->name }}" class="object-cover" />
@@ -37,7 +37,7 @@
                                 </div>
                             </a>
                         </x-slot>
-                        <a href="/">
+                        <a href="{{ route('series.show', $serie->slug) }}">
                             <div class="dark:text-white font-bold group-hover:text-blue-400">{{ $serie->name }}</div>
                         </a>
                     </x-movie-card>
