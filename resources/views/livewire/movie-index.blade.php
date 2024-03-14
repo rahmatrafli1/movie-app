@@ -113,22 +113,22 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @forelse ($movies as $movie)
+                    @forelse ($movies as $lmovie)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 border">
-                                <span wire:click="showMoviesDetail({{ $movie->id }})"
-                                    class="text-blue-500 hover:text-blue-700 cursor-pointer">{{ $movie->title }}</span>
+                                <span wire:click="showMoviesDetail({{ $lmovie->id }})"
+                                    class="text-blue-500 hover:text-blue-700 cursor-pointer">{{ $lmovie->title }}</span>
                             </td>
                             <td class="px-4 py-3 border">
-                                {{ $movie->rating }}
+                                {{ $lmovie->rating }}
                             </td>
                             <td class="px-4 py-3 border">
-                                {{ $movie->visits }}
+                                {{ $lmovie->visits }}
                             </td>
                             <td class="px-4 py-3 text-ms font-semibold border">
-                                {{ date('H:i:s', mktime(0, $movie->runtime)) }}</td>
+                                {{ date('H:i:s', mktime(0, $lmovie->runtime)) }}</td>
                             <td class="px-4 py-3 border">
-                                @if ($movie->is_public == 1)
+                                @if ($lmovie->is_public == 1)
                                     <span
                                         class="bg-green-200 text-center text-green-800 rounded-full grid font-bold">Yes</span>
                                 @else
@@ -137,15 +137,15 @@
                                 @endif
                             </td>
                             <td class="px-4 py-3 border">
-                                <img src="https://image.tmdb.org/t/p/w500{{ $movie->poster_path }}"
-                                    alt="{{ $movie->title }}" class="h-16 w-16">
+                                <img src="https://image.tmdb.org/t/p/w500{{ $lmovie->poster_path }}"
+                                    alt="{{ $lmovie->title }}" class="h-16 w-16">
                             </td>
                             <td class="px-4 py-3 text-sm border">
-                                <button type="button" wire:click="showTrailerModal({{ $movie->id }})"
+                                <button type="button" wire:click="showTrailerModal({{ $lmovie->id }})"
                                     class="inline-flex items-center px-4 py-2 bg-blue-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">Trailer</button>
-                                <button type="button" wire:click="showEditModal({{ $movie->id }})"
+                                <button type="button" wire:click="showEditModal({{ $lmovie->id }})"
                                     class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-800 focus:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">Edit</button>
-                                <x-m-button wire:click="deleteMovie({{ $movie->id }})"
+                                <x-m-button wire:click="deleteMovie({{ $lmovie->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white">Delete</x-m-button>
                             </td>
                         </tr>
