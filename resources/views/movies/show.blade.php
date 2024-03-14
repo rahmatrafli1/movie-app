@@ -52,10 +52,14 @@
                             @foreach ($movie->casts as $cast)
                                 <x-movie-card>
                                     <x-slot name="image">
-                                        <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{ $cast->poster_path }}"
-                                            alt="{{ $cast->name }}">
+                                        <a href="{{ route('casts.show', $cast->slug) }}">
+                                            <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{ $cast->poster_path }}"
+                                                alt="{{ $cast->name }}">
+                                        </a>
                                     </x-slot>
-                                    <span class="dark:text-white">{{ $cast->name }}</span>
+                                    <a href="{{ route('casts.show', $cast->slug) }}">
+                                        <span class="dark:text-white">{{ $cast->name }}</span>
+                                    </a>
                                 </x-movie-card>
                             @endforeach
                         </div>
