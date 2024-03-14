@@ -15,10 +15,11 @@
                             <div class="m-4 p-2">
                                 <h1 class="flex dark:text-white font-bold text-2xl">{{ $movie->title }}</h1>
                                 <div class="flex p-3 dark:text-white space-x-4">
-                                    <span>{{ $movie->release_date }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($movie->release_date)->format('Y') }}</span>
                                     <span class="ml-2 space-x-1">
                                         @foreach ($movie->genres as $genre)
-                                            {{ $genre->title }},
+                                            <a class="font-bold hover:text-blue-500"
+                                                href="{{ route('genres.show', $genre->slug) }}">{{ $genre->title }},</a>
                                         @endforeach
                                     </span>
                                     <span class="flex space-x-2">
