@@ -7,11 +7,11 @@
             </path>
             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round"></circle>
-        </svg>Search Movies<span class="ml-auto pl-3 flex-none text-xs font-semibold">
+        </svg>Search<span class="ml-auto pl-3 flex-none text-xs font-semibold">
     </button>
 
     <x-dialog-modal-dark wire:model="showSearchModal">
-        <x-slot name="title">Search Movies</x-slot>
+        <x-slot name="title">Search</x-slot>
         <x-slot name="content">
             <div class="flex flex-col">
                 <input wire:model.live="search" type="text" class="rounded w-full dark:bg-gray-700" id="searchMovie"
@@ -20,16 +20,16 @@
                 @if (!empty($search))
                     <div class="w-full">
                         @if (!empty($searchResults))
-                            @foreach ($searchResults as $movie)
-                                <a href="{{ route('movies.show', $movie->slug) }}">
+                            @foreach ($searchResults as $searchResult)
+                                <h1 class="text-white font-bold">{{ $searchResult['type'] }}</h1>
+
+                                <a href="{{ $searchResult['url'] }}">
                                     <div
                                         class="p-2 m-2 bg-gray-700 hover:bg-gray-500 dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900 rounded text-white cursor-pointer">
-                                        {{ $movie->title }}
+                                        {{ $searchResult['title'] }}
                                     </div>
                                 </a>
                             @endforeach
-                        @else
-                            <div>No Results</div>
                         @endif
                     </div>
                 @endif
